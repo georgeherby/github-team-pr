@@ -1,14 +1,15 @@
 // ==UserScript==
 // @name         PR-List
 // @namespace    http://hmrc.gov.uk
-// @version      1.8
+// @version      1.9
 // @description  PR list for given list of repos
 // @author       Martin Armstrong
 // @match        https://github.com/orgs/*/teams/*
 // @grant        none
-// @updateURL     https://github.com/martin-armstrong/github-team-pr/raw/master/PR%20List.user.js
-// @downloadURL   https://github.com/martin-armstrong/github-team-pr/raw/master/PR%20List.user.js
+// @updateURL     https://github.com/georgeherby/github-team-pr/raw/master/PR%20List.user.js
+// @downloadURL   https://github.com/georgeherby/github-team-pr/raw/master/PR%20List.user.js
 //
+// 1.9 - Show Draft PRs
 // 1.8 - Fix status parsing, due to GitHub content change
 // 1.7 - Switch to repo name exlusion patterns instead of white list. Add Team members only toggle.
 // 1.6 - Show pending checks in a dark yellow. Adds colour key to header. Fix repo links.
@@ -458,11 +459,11 @@ function loadPRLinks(repoNames){
 
           links.forEach(linkHtml=>{
               var prData = prDataParser(linkHtml, repoName);
-              if(prData.status!=STATUS.DRAFT) {
+              //if(prData.status!=STATUS.DRAFT) {
                 repoPRs.push(prData);
                 sortPrLinks(props.sortBy);
                 renderRows();
-              }
+              //}
               processedPRCount++;
 
               if(processedPRCount==prsToProcess) { //done all PRs in current repo
